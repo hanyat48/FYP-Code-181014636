@@ -1,0 +1,76 @@
+<html>
+{% load static %}
+<body style ="background-color:white;">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Hanya Ahmed">
+        <title style = "color:darkblue; font-size:50px;"> Image Processing </title>
+        <img src="/media/logo.png" alt="Icon" style="width:128px;height:128px;">
+    </head>
+    <style>       
+        ul {
+          list-style-type: none;
+          margin: 10px;
+          padding: 0;
+          overflow: hidden;
+          background-color: grey;
+        }
+
+        li {
+          float: left;
+        }
+
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 16px;
+          text-decoration: none;
+        }
+
+        li a:hover {
+          background-color: lightblue;
+        }
+    </style>
+    <body>
+        <ul>
+          <li><a href="Home">Home</a></li>
+          <li><a href="twoRegistration">2D Regisration</a></li>
+          <li><a href="Reconstruction">Reconsrtuction</a></li>
+          <li><a href="Denoising">Denoising</a></li>
+          <li><a href="Masking">Masking</a></li>
+          <li><a href="threeRegistration">3D Registration</a></li>
+          <li><a href ="SuggestedDecay"> SuggestedDecay</a></li>
+        </ul>
+
+        {% block content %}
+        <form method="Post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 style="color:grey; text-align: center;"> Moving Image </h2>
+            <div align="center">
+            <input type="file" id="MovingImage" name ="MovingImage">
+            </div>
+            <h2 style="color:grey; text-align: center;"> Fixed Image </h2>
+            <div align="center">
+            <input type="file" id="FixedImage" name="FixedImage" >
+            </div>
+            <h2 style ="color:grey; text-align: center;"> Filename of Registered Image </h2>
+            <div align="center">
+            <input type ="text" id="RegisteredImage" name="RegisteredImage" value="{{RName}}">
+            <button type="submit">Upload</button>
+            </div>
+        </form>
+        {% if Moving_file_url or Fixed_file_url or filepath or filepath or Image %}
+            <p>Moving Image uploaded at: <a href="{{ Moving_file_url }}">{{  Moving_file_url }}</a></p>
+            <p>Fixed Image uploaded at: <a href="{{ Fixed_file_url }}">{{ Fixed_file_url }}</a></p>
+            <p>Registered Image uploaded at: <a href="{{Registered_file_url}}"> {{Registered_file_url}}</a></p>
+            <p>Image <a href="{{Image}}"> {{Image}}</a></p>
+        {% endif %}
+        {% endblock %}
+        <ul>
+            <p style="color:white; text-align: center;"> The registered image will be saved into the media folder.
+            </p>
+        </ul>
+    </body>
+</html>

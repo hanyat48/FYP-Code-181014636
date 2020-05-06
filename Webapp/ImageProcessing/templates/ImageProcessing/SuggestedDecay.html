@@ -1,0 +1,73 @@
+<html>
+{% load static %}
+<body style ="background-color:white;">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Hanya Ahmed">
+        <title style = "color:darkblue; font-size:50px;"> Image Processing </title>
+        <img src="/media/logo.jpg" alt="Icon" style="width:128px;height:128px;">
+    </head>
+    <style>       
+        ul {
+          list-style-type: none;
+          margin: 10px;
+          padding: 0;
+          overflow: hidden;
+          background-color: grey;
+        }
+
+        li {
+          float: left;
+        }
+
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 16px;
+          text-decoration: none;
+        }
+
+        li a:hover {
+          background-color: lightblue;
+        }
+    </style>
+    <body>
+        <ul>
+          <li><a href="Home">Home</a></li>
+          <li><a href="twoRegistration">2D Regisration</a></li>
+          <li><a href="Reconstruction">Reconstruction</a></li>
+          <li><a href="Denoising">Denoising</a></li>
+          <li><a href="Masking">Masking</a></li>
+          <li><a href="Length">Length</a></li>
+          <li><a href ="SuggestedDecay"> SuggestedDecay</a></li>
+        </ul>
+        
+        {% block content %}
+        <form method="Post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 style="color:grey; text-align: center;"> File Path </h2>
+            <p style="color:grey; text-align: center;"> Enter the filepath of B-Scan</p>
+            <div align="center">
+            <input type="text" id="Filepath" name ="Filepath">
+            <p style="color:grey; text-align: center;"> Name of output 1: ie.Image.png</p>
+            <input type="text" id="Name" name= "Name">
+            <p style="color:grey; text-align: center;"> Name of output 2: ie.Image.png</p>
+            <input type="text" id="Name1" name= "Name1">            
+            <button type="submit">Submit</button>
+            </div>
+        </form>
+        {% if Im1 or Im or I1 or I %}
+            <p>Image uploaded at: <a href="{{I}}"> {{I}}</a></p>
+            <p>Image1 uploaded at: <a href="{{I1}}"> {{I1}}</a></p>
+            <p>Image <a href="{{Im}}"> {{Im}}</a></p>
+            <p>Image1 <a href="{{Im1}}">{{Im1}}</a></p>
+        {% endif %}
+        {% endblock %}
+        <ul>
+            <p style="color:white; text-align: center;"> The images will be saved in the media folder shortly.
+            </p>
+        </ul>
+    </body>
+</html>
